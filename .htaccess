@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteBase /laravel-prj/
-RewriteRule ^web\\.php$ - [L]
+RewriteBase /BirthDay-CountDown/
+RewriteRule ^routes\\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /laravel-prj/web.php [L]
+RewriteRule . /BirthDay-CountDown/routes.php [L]
