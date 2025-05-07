@@ -13,6 +13,7 @@ class Login_controller{
 
 
 
+
     public function login_check() {
         $name = $_POST['username'];
         $password = $_POST['password'];

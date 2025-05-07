@@ -71,35 +71,30 @@
         }
     </style>
 </head>
-<body>
+<body dir="rtl">
 
 <header>
-    <h1>Arna Vision BirthDay Core</h1>
+    <h1>زادروز تیم آرنا ویژن</h1>
 </header>
 
-<div class="countdown-box">
-    <h2>Next Birthday: Sarah</h2>
-    <div class="countdown">5 days left!</div>
-    <div class="quote">"Sarah brings light wherever she goes."</div>
-</div>
-
 <section class="birthdays">
-    <div class="card">
-        <h3>Ali</h3>
-        <p>May 8</p>
-    </div>
-    <div class="card">
-        <h3>Fatemeh</h3>
-        <p>May 12</p>
-    </div>
-    <div class="card">
-        <h3>Reza</h3>
-        <p>May 20</p>
-    </div>
-    <div class="card">
-        <h3>Sara</h3>
-        <p>May 25</p>
-    </div>
+    <?php if (!empty($birthday_list) && $birthday_list->num_rows>0):?>
+        <?php foreach ($birthday_list as $item): ?>
+            <?php
+            $timestamp = strtotime($item['birthday']);
+            $shamsi = jdate('Y/m/d', $timestamp);
+            ?>
+            <div class="card">
+                <h3><?= htmlspecialchars($item['name']) ?></h3>
+                <p><?= $shamsi ?> (<?= $item['days_left'] ?> روز مانده)</p>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <div class="countdown-box">
+            <h2>هیچ تولدی در ۳۰ روز آینده نیست!</h2>
+            <div class="quote">"لحظه‌ها را زندگی کن..."</div>
+        </div>
+    <?php endif; ?>
 </section>
 
 </body>

@@ -8,6 +8,10 @@ h1 {
     text-align: center;
     color: #333;
 }
+a{
+    margin-right: 40%;
+
+}
 .form-container, .table-container {
     background: #fff;
     padding: 20px;

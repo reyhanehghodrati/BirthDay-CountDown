@@ -20,7 +20,17 @@ require_once 'controller/Birthday_insert_controller.php';
 <h1>پنل مدیریت تولدها</h1>
 
 <div class="form-container">
-    <form action="" method="POST">
+    <?php
+    if (isset($_SESSION['message'])):
+        ?>
+        <p style="color: red"><?php
+            echo $_SESSION['message'];
+            unset($_SESSION['message']);
+            ?></p>
+    <?php
+    endif; ?>
+
+    <form action="" method="POST" enctype="multipart/form-data">
         <label for="name">نام:</label>
         <input type="text" name="name" id="name" required>
 
@@ -34,10 +44,11 @@ require_once 'controller/Birthday_insert_controller.php';
 
 
         <label for="about">توضیحات:</label>
-        <textarea name="about" id="about" rows="4" required></textarea>
+        <textarea name="about" id="about" rows="4" ></textarea>
 
         <input type="submit" value="اضافه کردن تولد">
     </form>
+    <a href="/BirthDay-CountDown/view/home" >خانه</a>
 </div>
 
 <div class="table-container">
