@@ -3,7 +3,10 @@ if (!isset($_SESSION['username'])) {
     header("Location: /BirthDay-CountDown/view/login");
     exit();
 }
-
+$_SESSION["token"] = bin2hex(random_bytes(32));
+// expiration token:
+$_SESSION["token-expire"] = time() + 3600;
+$old_values=$_SESSION['old_values'] ?? [];
 require_once 'controller/Birthday_insert_controller.php';
 
 ?>
@@ -45,7 +48,7 @@ require_once 'controller/Birthday_insert_controller.php';
 
         <label for="about">توضیحات:</label>
         <textarea name="about" id="about" rows="4" ></textarea>
-
+<!--        <input type="hidden" name="token" value="--><?//= $_SESSION["token"] ?><!--"/>-->
         <input type="submit" value="اضافه کردن تولد">
     </form>
     <a href="/BirthDay-CountDown/view/home" >خانه</a>

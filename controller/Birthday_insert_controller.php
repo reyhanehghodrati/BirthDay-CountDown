@@ -15,6 +15,16 @@ class Birthday_insert_controller{
 
     }
     public function set_result(){
+//        if (!isset($_POST["token"]) || !isset($_SESSION["token"])) {
+//            exit("token not set");
+//        }
+////check token:
+//        if ($_POST["token"] == $_SESSION["token"]) {
+//            if (time() >= $_SESSION["token-expire"]) {
+//                unset($_SESSION["token"]);
+//                unset($_SESSION["token-expire"]);
+//                exit("token expire.reload the form");
+//            }
         $set= new Birthday();
         if(isset($_POST['name'] , $_POST['mobile'] ,$_POST['birthday'],$_POST['about'])){
             $set->name=$_POST['name'];
