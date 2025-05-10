@@ -1,7 +1,7 @@
 <?php
 require_once 'model/Birthday.php';
 require 'vendor/autoload.php';
-
+require_once 'model/SendSms.php';
 
 
 class Birthday_get_controller{
@@ -12,10 +12,17 @@ class Birthday_get_controller{
         include 'view/Home.php';
     }
     public function sendSMS(){
-        $sender = "2000660110";
-        $receptor = "09109253995";
-        $message = "وب سرویس پیام کوتاه کاوه نگار";
-        $api = new \Kavenegar\KavenegarApi("723454473278747443444E65453776625A6A706A59773167416E3768724F4336");
-        $api -> Send ($sender,$receptor,$message);
+
+        $send= new SendSms();
+        $show = new Birthday();
+        $birthday_list=$show->get_closeset_birthday_toSend();
+        if (!empty($birthday_list) && $birthday_list->num_rows>0):{
+            foreach ($birthday_list as $item):{
+                $name = $item['name'];
+                $send->sendMsgToUser($name);
+            }endforeach;}
+    endif;
+        header('Location: home');
+        exit();
     }
 }

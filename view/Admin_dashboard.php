@@ -45,6 +45,9 @@ require_once 'controller/Birthday_insert_controller.php';
         <label for="name">تولد:</label>
         <input type="text" name="birthday" id="name" required placeholder="1380/01/01">
 
+<!--        <label>کد امنیتی</label>-->
+<!--        <img src="../php/captcha.php" alt="captcha code">-->
+<!--        <input type="text" name="captcha_input" placeholder="کد را وارد کنید " >-->
 
         <label for="about">توضیحات:</label>
         <textarea name="about" id="about" rows="4" ></textarea>

@@ -35,7 +35,7 @@ class Birthday
          $date_shamsi=$this->ValidDate($input_date);
          $miladi_date=$this->shamsi_to_miladi($date_shamsi);
 
-         $sql = "INSERT INTO birthdays (name,mobile,birthday,about)VALUES ('$this->name','$this->mobile','$miladi_date','$this->about')";
+         $sql = "INSERT INTO birthdays (name,mobile,birthday,about)VALUES ('$this->name','$this->mobile','$this->birthday','$this->about')";
          if ($conn->query($sql) === TRUE) {
              return true;
          } else {
@@ -60,5 +60,19 @@ class Birthday
 
          return $conn->query($query);
      }
+    public function get_closeset_birthday_toSend(){
 
+        $conn = database::connect();
+
+        $today = date('m-d');
+        $end = date('m-d', strtotime('+10 days'));
+
+        $query = "SELECT *, 
+                DATEDIFF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', DATE_FORMAT(birthday, '%m-%d')), '%Y-%m-%d'), CURDATE()) AS days_left
+                FROM birthdays
+                HAVING days_left BETWEEN 0 AND 10
+                ORDER BY days_left ASC";
+
+        return $conn->query($query);
+    }
    }

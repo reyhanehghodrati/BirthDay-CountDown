@@ -78,6 +78,7 @@
 </header>
 
 <section class="birthdays">
+
     <?php if (!empty($birthday_list) && $birthday_list->num_rows>0):?>
         <?php foreach ($birthday_list as $item): ?>
             <?php

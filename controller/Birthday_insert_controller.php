@@ -15,6 +15,7 @@ class Birthday_insert_controller{
 
     }
     public function set_result(){
+//        $captcha=$_POST['captcha_input'] ?? '';
 //        if (!isset($_POST["token"]) || !isset($_SESSION["token"])) {
 //            exit("token not set");
 //        }
