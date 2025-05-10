@@ -17,6 +17,10 @@ require_once 'controller/Birthday_insert_controller.php';
     <meta charset="UTF-8">
     <title>داشبورد ادمین</title>
     <link rel="stylesheet" href="../css/Admin_dashboard.css">
+    <link rel="stylesheet" href="https://unpkg.com/persian-datepicker@latest/dist/css/persian-datepicker.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://unpkg.com/persian-date@latest/dist/persian-date.js"></script>
+    <script src="https://unpkg.com/persian-datepicker@latest/dist/js/persian-datepicker.js"></script>
 </head>
 <body dir="rtl">
 
@@ -43,9 +47,9 @@ require_once 'controller/Birthday_insert_controller.php';
         </br>
         </br>
         <label for="name">تولد:</label>
-        <input type="text" name="birthday" id="name" required placeholder="1380/01/01">
+        <input type="text" name="birthday" class="date_picker" id="name" required placeholder="1380/01/01">
 
-<!--        <label>کد امنیتی</label>-->
+<!--        <label>کد امنیتی:</label>-->
 <!--        <img src="../php/captcha.php" alt="captcha code">-->
 <!--        <input type="text" name="captcha_input" placeholder="کد را وارد کنید " >-->
 
@@ -65,19 +69,33 @@ require_once 'controller/Birthday_insert_controller.php';
             <th>موبایل</th>
             <th>تولد</th>
             <th>توضیحات</th>
+            <th>عملیات</th>
         </tr>
         <?php
 
-        while ($row =$result->fetch_assoc()): ?>
+        while ($row =$result->fetch_assoc()):
+            $date=strtotime($row['birthday'])?>
             <tr>
                 <td><?= htmlspecialchars($row['name']) ?></td>
                 <td><?= htmlspecialchars($row['mobile']) ?></td>
-                <td><?= htmlspecialchars($row['birthday']) ?></td>
+                <td><?= htmlspecialchars( jdate('Y/m/d',$date )) ?></td>
                 <td><?= htmlspecialchars($row['about']) ?></td>
+                <td>
+                    <form action="/BirthDay-CountDown/view/deleteUser" method="post" onsubmit="return confirm('آیا مطمئن هستید؟')">
+                        <input type="hidden" name="id" value="<?= $row["id"] ?>">
+                        <button type="submit">حذف</button>
+                    </form>
+                </td>
             </tr>
         <?php endwhile; ?>
     </table>
 </div>
-
+<script>
+$('.date_picker').persianDatepicker({
+    observer: true,
+    format: 'YYYY/MM/DD',
+    altField: '.observer-example-alt'
+});
+</script>
 </body>
 </html>

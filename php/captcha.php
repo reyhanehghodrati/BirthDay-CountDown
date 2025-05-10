@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 $random_str = str_shuffle($str);
@@ -9,7 +8,7 @@ $_SESSION["captcha"] = $captcha_code;
 $font = "../font/times_new_yorker.ttf";
 $font_size = 20;
 $img_width = 135;
-$img_height = 35;
+$img_height = 25;
 
 $image = imagecreate($img_width, $img_height);
 $bg_color = imagecolorallocate($image, 255, 255, 255);

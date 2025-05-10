@@ -24,7 +24,7 @@ class database
         return self::$conn;
     }
 
-    private static function loadenv($file)
+    public static function loadenv($file)
     {
         if (!file_exists($file)) return;
 

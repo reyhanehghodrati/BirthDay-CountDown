@@ -11,6 +11,7 @@ $viewDir = '/view/';
 
 
 switch ($request['path']) {
+    case  '/':
     case '/BirthDay-CountDown/view/home':
         $controller=new Birthday_get_controller();
         $controller->show_result();
@@ -42,6 +43,10 @@ switch ($request['path']) {
         $controller->sendSMS();
         break;
 
+    case '/BirthDay-CountDown/view/deleteUser':
+        $del=new Birthday_get_controller();
+        $del->deleteUser();
+        break;
 
     default:
         http_response_code(404);
