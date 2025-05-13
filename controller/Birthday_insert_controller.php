@@ -11,7 +11,7 @@ class Birthday_insert_controller{
             $show = new Birthday();
             $result=$show->get_birthday();
             include 'view/Admin_dashboard.php';
-//        header("Location:/BirthDay-CountDown/view/Admin_dashboard");
+//        header("Location:/BirthDay-CountDown/Admin_dashboard");
 
     }
     public function set_result()

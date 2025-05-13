@@ -26,7 +26,7 @@ class Login_controller{
             //-------
             if ($check->login()) {
                 $_SESSION['username']=$name;
-                header("Location: /BirthDay-CountDown/view/Admin-dashboard");
+                header("Location: /BirthDay-CountDown/Admin-dashboard");
                 exit;
             } else {
                 $_SESSION['message'] = "<span style='color: red;'>نام کاربری یا پسوورد اشتباه است  ;</span>";
@@ -35,7 +35,7 @@ class Login_controller{
         } else {
             $_SESSION['message'] = "<span style='color: red;'>همه فیلدها الزامی هستند</span>";
         }
-        header("Location: /BirthDay-CountDown/view/login");
+        header("Location: /BirthDay-CountDown/login");
         exit;
     }
 }

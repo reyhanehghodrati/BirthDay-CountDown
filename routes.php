@@ -12,11 +12,11 @@ $viewDir = '/view/';
 
 switch ($request['path']) {
     case  '/':
-    case '/BirthDay-CountDown/view/home':
+    case '/BirthDay-CountDown/':
         $controller=new Birthday_get_controller();
         $controller->show_result();
         break;
-    case '/BirthDay-CountDown/view/login':
+    case '/BirthDay-CountDown/login':
         $controller=new Login_controller();
         if($_SERVER['REQUEST_METHOD']==='POST'){
             $controller->login_check();
@@ -24,9 +24,9 @@ switch ($request['path']) {
             $controller->showForm();
         }
         break;
-    case '/BirthDay-CountDown/view/Admin-dashboard':
+    case '/BirthDay-CountDown/Admin-dashboard':
         if(!isset($_SESSION['username'])){
-            header("Location:/BirthDay-CountDown/view/login");
+            header("Location:/BirthDay-CountDown/login");
             exit;
         }else{
             $controller=new Birthday_insert_controller();
@@ -38,12 +38,12 @@ switch ($request['path']) {
             break;
         }
 
-    case '/BirthDay-CountDown/view/Admin-send':
+    case '/BirthDay-CountDown/Admin-send':
         $controller = new Birthday_get_controller();
         $controller->sendSMS();
         break;
 
-    case '/BirthDay-CountDown/view/deleteUser':
+    case '/BirthDay-CountDown/deleteUser':
         $del=new Birthday_get_controller();
         $del->deleteUser();
         break;

@@ -2,7 +2,6 @@
 ?>
 <html>
 <head>
-
 </head>
 <body>
 <h1>404</h1>

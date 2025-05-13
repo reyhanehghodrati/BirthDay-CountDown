@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['username'])) {
-    header("Location: /BirthDay-CountDown/view/login");
+    header("Location: /BirthDay-CountDown/login");
     exit();
 }
 $_SESSION["token"] = bin2hex(random_bytes(32));
@@ -13,15 +13,11 @@ require_once 'controller/Birthday_insert_controller.php';
 
 <!DOCTYPE html>
 <html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <title>داشبورد ادمین</title>
-    <link rel="stylesheet" href="../css/Admin_dashboard.css">
-    <link rel="stylesheet" href="https://unpkg.com/persian-datepicker@latest/dist/css/persian-datepicker.css"/>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://unpkg.com/persian-date@latest/dist/persian-date.js"></script>
-    <script src="https://unpkg.com/persian-datepicker@latest/dist/js/persian-datepicker.js"></script>
-</head>
+<?php
+$title="داشبورد ادمین";
+$css="css/Admin_dashboard.css";
+include 'php/head.php';
+?>
 <body dir="rtl">
 
 <h1>پنل مدیریت تولدها</h1>
