@@ -47,7 +47,9 @@ switch ($request['path']) {
         $del=new Birthday_get_controller();
         $del->deleteUser();
         break;
-
+    case '/BirthDay-CountDown/index.php':
+        include 'index.php';
+        break;
     default:
         http_response_code(404);
         require __DIR__ . $viewDir . '404.php';

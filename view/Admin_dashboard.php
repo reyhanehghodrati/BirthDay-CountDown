@@ -10,13 +10,14 @@ $old_values=$_SESSION['old_values'] ?? [];
 require_once 'controller/Birthday_insert_controller.php';
 
 ?>
-
 <!DOCTYPE html>
 <html lang="fa">
 <?php
 $title="داشبورد ادمین";
 $css="css/Admin_dashboard.css";
+
 include 'php/head.php';
+include 'php/datapicker.php';
 ?>
 <body dir="rtl">
 
@@ -54,7 +55,7 @@ include 'php/head.php';
 <!--        <input type="hidden" name="token" value="--><?//= $_SESSION["token"] ?><!--"/>-->
         <input type="submit" value="اضافه کردن تولد">
     </form>
-    <a href="/BirthDay-CountDown/view/home" >خانه</a>
+    <a href="/BirthDay-CountDown/" >خانه</a>
 </div>
 
 <div class="table-container">
@@ -77,7 +78,7 @@ include 'php/head.php';
                 <td><?= htmlspecialchars( jdate('Y/m/d',$date )) ?></td>
                 <td><?= htmlspecialchars($row['about']) ?></td>
                 <td>
-                    <form action="/BirthDay-CountDown/view/deleteUser" method="post" onsubmit="return confirm('آیا مطمئن هستید؟')">
+                    <form action="/BirthDay-CountDown/deleteUser" method="post" onsubmit="return confirm('آیا مطمئن هستید؟')">
                         <input type="hidden" name="id" value="<?= $row["id"] ?>">
                         <button type="submit">حذف</button>
                     </form>
