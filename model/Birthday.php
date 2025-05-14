@@ -86,9 +86,6 @@ class Birthday
 
         $conn = database::connect();
 
-        $today = date('m-d');
-        $end = date('m-d', strtotime('+5 days'));
-
         $query = "SELECT *, 
                 DATEDIFF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', DATE_FORMAT(birthday, '%m-%d')), '%Y-%m-%d'), CURDATE()) AS days_left
                 FROM birthdays

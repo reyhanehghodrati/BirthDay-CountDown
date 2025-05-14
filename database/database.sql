@@ -27,5 +27,3 @@ COMMIT;
 
 INSERT INTO `site_users` (`id`, `username`, `password`, `role`, `created_at`) VALUES
     (1, 'admin', 'admin123', 'admin', '2025-02-25 06:33:05');
-
-

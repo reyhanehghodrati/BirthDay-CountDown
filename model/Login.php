@@ -9,19 +9,21 @@ class Login
 
     public function login()
     {
-        $password=$this->password;
-        $password=md5($password);
-        $conn=database::connect();
-        $sql = "SELECT * FROM site_users WHERE username = '$this->username' AND password ='$password'";
-        $result=$conn->query($sql);
-        if ($result && $result->num_rows>0) {
-            return TRUE;
-        } else {
-            return false;
+        $conn = database::connect();
+
+        $stmt = $conn->prepare("SELECT password FROM site_users WHERE username = ?");
+        $stmt->bind_param("s", $this->username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $storedHash = $row['password'];
+            if (password_verify($this->password, $storedHash)) {
+                return true;
+            }
         }
-
-
+        return false;
     }
-
 
 }

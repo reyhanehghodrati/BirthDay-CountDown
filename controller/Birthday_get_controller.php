@@ -30,7 +30,6 @@ class Birthday_get_controller{
                 $send->sendMsgToUser($name,$apikey,$phone);
             }endforeach;}
     endif;
-        header('Location: home');
         exit();
     }
     public function deleteUser(){

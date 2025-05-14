@@ -17,7 +17,7 @@ class SendSms
     );
     function sendMsgToUser($name,$apikey,$phone){
 
-//        $phone = $this->param['adminPhoneNumber'];
+        $phone = $this->param['adminPhoneNumber'];
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.kavenegar.com/v1/'.$apikey.'/verify/lookup.json?receptor='.$phone.'&token='.$name.'&template='.$this->param['userTemplate'],

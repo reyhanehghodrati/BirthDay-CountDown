@@ -21,18 +21,3 @@
 //}
 //?>
 
-
-<?php
-require_once '../php/jdf.php';
-function shamsi_to_miladi($date) {
-// Separate the Shamsi date components
-list($year, $month, $day) = explode('/', $date);
-
-// Convert Shamsi date to Miladi
-list($gy, $gm, $gd) = jalali_to_gregorian((int)$year, (int)$month, (int)$day);
-
-return sprintf('%04d-%02d-%02d', $gy, $gm, $gd);
-
-}
-echo shamsi_to_miladi('1385/05/25');
-?>
