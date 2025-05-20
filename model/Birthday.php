@@ -10,12 +10,14 @@ class Birthday
     public int $mobile;
     public int $id;
     public int $send_id;
+    public $days;
 
     function shamsi_to_miladi($date) {
         list($year, $month, $day) = explode('/', $date);
         list($gy, $gm, $gd) = jalali_to_gregorian((int)$year, (int)$month, (int)$day);
         return sprintf('%04d-%02d-%02d', $gy, $gm, $gd);
     }
+
 
 
 
@@ -79,24 +81,29 @@ class Birthday
 
 
     public function get_closeset_birthday_toSend(){
-
         $conn = database::connect();
+    $query = "SELECT *, 
+            DATEDIFF(
+                STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', DATE_FORMAT(birthday, '%m-%d')), '%Y-%m-%d'),
+                CURDATE()
+            ) AS days_left
+            FROM birthdays
+            HAVING days_left BETWEEN 0 AND ?
+            ORDER BY days_left ASC";
 
-        $query = "SELECT *, 
-                DATEDIFF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', DATE_FORMAT(birthday, '%m-%d')), '%Y-%m-%d'), CURDATE()) AS days_left
-                FROM birthdays
-                HAVING days_left BETWEEN 0 AND 5
-                ORDER BY days_left ASC";
-
-        return $conn->query($query);
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $this->days);
+    $stmt->execute();
+    return $stmt->get_result();
     }
+
     public function check_send(){
         $conn = database::connect();
 
     $query = "SELECT * 
           FROM birthdays 
           WHERE (sms_status = 0 AND id = '$this->send_id') 
-          OR (id = '$this->send_id'AND  sms_status = 1 AND sms_send_at <= DATE_SUB(NOW(), INTERVAL 1 YEAR))";
+          OR (id = '$this->send_id' AND  sms_status = 1 AND sms_send_at <= DATE_SUB(NOW(), INTERVAL 1 YEAR))";
 
 
 

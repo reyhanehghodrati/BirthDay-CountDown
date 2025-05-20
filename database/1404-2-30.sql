@@ -14,3 +14,10 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+
+
+-- جدول شماره ادمین و روز تا ارسال
+
+CREATE TABLE settings( id INT AUTO_INCREMENT PRIMARY KEY, admin_phone varchar(20), notif_day int DEFAULT 5 );
+INSERT INTO `settings` (`id`, `admin_phone`, `notif_day`) VALUES (NULL, '09109253995', '5');

@@ -1,5 +1,6 @@
 <?php
-require_once 'model/Birthday.php';
+require_once ROOT.'model/Birthday.php';
+require_once ROOT.'model/Settings.php';
 
 
 class Birthday_insert_controller{
@@ -9,7 +10,11 @@ class Birthday_insert_controller{
     public function show_result() {
             //ساخت یه شی از کلاس کانتکت
             $show = new Birthday();
+            $settongs = new Setting();
+
             $result=$show->get_birthday();
+            $setting_r=$settongs->getSettings();
+
             include 'view/Admin_dashboard.php';
 //        header("Location:/BirthDay-CountDown/Admin_dashboard");
 

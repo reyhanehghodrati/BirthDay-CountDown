@@ -8,7 +8,7 @@ $_SESSION["token"] = bin2hex(random_bytes(32));
 $_SESSION["token-expire"] = time() + 3600;
 $old_values=$_SESSION['old_values'] ?? [];
 require_once ROOT.'controller/Birthday_insert_controller.php';
-
+require_once ROOT.'controller/Sms_setting.php';
 ?>
 <!DOCTYPE html>
 <html lang="fa">
@@ -17,7 +17,7 @@ $title="داشبورد ادمین";
 $css="css/Admin_dashboard.css";
 
 include 'php/head.php';
-include 'php/datapicker.php';
+//include 'php/datapicker.php';
 ?>
 <body dir="rtl">
 
@@ -86,6 +86,32 @@ include 'php/datapicker.php';
             </tr>
         <?php endwhile; ?>
     </table>
+</div>
+<div  class="table-container">
+    <h2>تنظیمات</h2>
+    <table>
+        <tr>
+            <th>روز باقی مانده تا تولد</th>
+            <th>شماره تماس ادمین</th>
+        </tr>
+        <tr>
+            <?php
+            while ($row =$setting_r->fetch_assoc()): ?>
+            <td>
+                <form action="/update_notifday" method="post" onsubmit="return confirm('آیا مطمئن هستید؟')">
+                    <input type="number" name="notif_day" value="<?= htmlspecialchars($row['notif_day']) ?>">
+                    <button type="submit">ثبت</button>
+                </form>
+            </td>
+            <td>
+                <form action="/update_phone" method="post" onsubmit="return confirm('آیا مطمئن هستید؟')">
+                <input type="number" name="admin-num" value="<?= htmlspecialchars($row['admin_phone']) ?>">
+                <button type="submit">ثبت</button>
+                </form>
+            </td>
+        </tr>
+        <?php endwhile; ?>
+        </table>
 </div>
 <script>
 $('.date_picker').persianDatepicker({

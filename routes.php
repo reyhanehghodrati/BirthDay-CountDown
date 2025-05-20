@@ -4,10 +4,12 @@ require_once 'config.php';
 require_once ROOT.'controller/Login_controller.php';
 require_once ROOT.'controller/Birthday_insert_controller.php';
 require_once ROOT.'controller/Birthday_get_controller.php';
+require_once ROOT.'controller/Sms_setting.php';
 
 require_once ROOT.'model/Login.php';
 require_once ROOT.'model/Birthday.php';
 require_once ROOT.'model/SendSms.php';
+require_once ROOT.'model/Settings.php';
 $viewDir = '/view/';
 
 
@@ -33,22 +35,29 @@ switch ($request['path']) {
             exit;
         }else{
             $controller=new Birthday_insert_controller();
-
+            $ncontroller= new Sms_setting();
             if(isset($_POST['name'] , $_POST['mobile'] ,$_POST['birthday'],$_POST['about'])) {
                 $controller->set_result();
             }
+
             $controller->show_result();
+
             break;
         }
 
     case '/Admin-send':
         $controller = new Birthday_get_controller();
-        $result=$controller->sendSMS();
-        if($result){
-
-        }
+        $controller->sendSMS();
         break;
 
+    case '/update_phone':
+        $controller = new Sms_setting();
+        $controller->update_phone();
+        break;
+    case '/update_notifday':
+        $controller = new Sms_setting();
+        $controller->update_notifday();
+        break;
     case '/deleteUser':
         $del=new Birthday_get_controller();
         $del->deleteUser();
