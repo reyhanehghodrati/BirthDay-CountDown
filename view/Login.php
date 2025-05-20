@@ -3,7 +3,7 @@
 <?php
 $title="ورود";
 $css="css/login.css";
-include 'php/head.php';
+include ROOT.'php/head.php';
 ?>
 <body>
 <div class="wrapper">

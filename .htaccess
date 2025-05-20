@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteBase /BirthDay-CountDown/
+RewriteBase /
 RewriteRule ^index\\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /BirthDay-CountDown/index.php [L]
+RewriteRule . /index.php [L]

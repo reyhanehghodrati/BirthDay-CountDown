@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'model/login.php';
+include ROOT.'model/login.php';
 
 
 class Login_controller{
@@ -8,7 +8,7 @@ class Login_controller{
 
 
     public function showForm(){
-        require_once 'view/Login.php';
+        require_once ROOT.'view/Login.php';
     }
 
 
@@ -26,7 +26,7 @@ class Login_controller{
             //-------
             if ($check->login()) {
                 $_SESSION['username']=$name;
-                header("Location: /BirthDay-CountDown/Admin-dashboard");
+                header("Location: /Admin-dashboard");
                 exit;
             } else {
                 $_SESSION['message'] = "<span style='color: red;'>نام کاربری یا پسوورد اشتباه است  ;</span>";
@@ -35,7 +35,7 @@ class Login_controller{
         } else {
             $_SESSION['message'] = "<span style='color: red;'>همه فیلدها الزامی هستند</span>";
         }
-        header("Location: /BirthDay-CountDown/login");
+        header("Location: /login");
         exit;
     }
 }

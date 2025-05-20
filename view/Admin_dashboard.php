@@ -1,13 +1,13 @@
 <?php
 if (!isset($_SESSION['username'])) {
-    header("Location: /BirthDay-CountDown/login");
+    header("Location: /login");
     exit();
 }
 $_SESSION["token"] = bin2hex(random_bytes(32));
 // expiration token:
 $_SESSION["token-expire"] = time() + 3600;
 $old_values=$_SESSION['old_values'] ?? [];
-require_once 'controller/Birthday_insert_controller.php';
+require_once ROOT.'controller/Birthday_insert_controller.php';
 
 ?>
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ include 'php/datapicker.php';
 <!--        <input type="hidden" name="token" value="--><?//= $_SESSION["token"] ?><!--"/>-->
         <input type="submit" value="اضافه کردن تولد">
     </form>
-    <a href="/BirthDay-CountDown/" >خانه</a>
+    <a href="/" >خانه</a>
 </div>
 
 <div class="table-container">
@@ -78,7 +78,7 @@ include 'php/datapicker.php';
                 <td><?= htmlspecialchars( jdate('Y/m/d',$date )) ?></td>
                 <td><?= htmlspecialchars($row['about']) ?></td>
                 <td>
-                    <form action="/BirthDay-CountDown/deleteUser" method="post" onsubmit="return confirm('آیا مطمئن هستید؟')">
+                    <form action="/deleteUser" method="post" onsubmit="return confirm('آیا مطمئن هستید؟')">
                         <input type="hidden" name="id" value="<?= $row["id"] ?>">
                         <button type="submit">حذف</button>
                     </form>

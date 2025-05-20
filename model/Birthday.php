@@ -4,11 +4,12 @@ require_once 'php/jdf.php';
 
 class Birthday
 {
-    public $name;
+    public string $name;
     public $birthday;
-    public $about;
-    public $mobile;
-    public $id;
+    public string $about;
+    public int $mobile;
+    public int $id;
+    public int $send_id;
 
     function shamsi_to_miladi($date) {
         list($year, $month, $day) = explode('/', $date);
@@ -39,8 +40,7 @@ class Birthday
     {
         $conn=database::connect();
         $query = "SELECT * FROM birthdays";
-        $result = $conn->query($query);
-        return $result;
+        return $conn->query($query);
     }
 
 
@@ -66,10 +66,6 @@ class Birthday
      public function get_closeset_birthday(){
 
          $conn = database::connect();
-
-         $today = date('m-d');
-         $end = date('m-d', strtotime('+30 days'));
-
          $query = "SELECT *, 
                 DATEDIFF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', DATE_FORMAT(birthday, '%m-%d')), '%Y-%m-%d'), CURDATE()) AS days_left
                 FROM birthdays
@@ -91,6 +87,27 @@ class Birthday
                 FROM birthdays
                 HAVING days_left BETWEEN 0 AND 5
                 ORDER BY days_left ASC";
+
+        return $conn->query($query);
+    }
+    public function check_send(){
+        $conn = database::connect();
+
+    $query = "SELECT * 
+          FROM birthdays 
+          WHERE (sms_status = 0 AND id = '$this->send_id') 
+          OR (id = '$this->send_id'AND  sms_status = 1 AND sms_send_at <= DATE_SUB(NOW(), INTERVAL 1 YEAR))";
+
+
+
+        return $conn->query($query);
+    }
+    public function update_status(){
+        $conn = database::connect();
+
+        $query = "UPDATE birthdays
+                SET sms_status = 1
+                WHERE id = '$this->send_id'";
 
         return $conn->query($query);
     }

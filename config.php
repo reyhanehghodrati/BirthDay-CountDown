@@ -1,4 +1,3 @@
 <?php
 
-define("ROOT" , __dir__ ."/");
-echo ROOT;
+define("ROOT" , __DIR__ ."/");

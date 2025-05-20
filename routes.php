@@ -1,32 +1,35 @@
 <?php
 $request =parse_url( $_SERVER['REQUEST_URI']);
-require_once 'controller/Login_controller.php';
-require_once 'controller/Birthday_insert_controller.php';
-require_once 'controller/Birthday_get_controller.php';
+require_once 'config.php';
+require_once ROOT.'controller/Login_controller.php';
+require_once ROOT.'controller/Birthday_insert_controller.php';
+require_once ROOT.'controller/Birthday_get_controller.php';
 
-require_once 'model/Login.php';
-require_once 'model/Birthday.php';
-require_once 'model/SendSms.php';
+require_once ROOT.'model/Login.php';
+require_once ROOT.'model/Birthday.php';
+require_once ROOT.'model/SendSms.php';
 $viewDir = '/view/';
 
 
 switch ($request['path']) {
     case  '/':
-    case '/BirthDay-CountDown/':
         $controller=new Birthday_get_controller();
         $controller->show_result();
         break;
-    case '/BirthDay-CountDown/login':
+    case '/login':
         $controller=new Login_controller();
+        if(isset($_SESSION['username'])){
+            header("Location:/Admin-dashboard");
+            exit;}
         if($_SERVER['REQUEST_METHOD']==='POST'){
             $controller->login_check();
         }else{
             $controller->showForm();
         }
         break;
-    case '/BirthDay-CountDown/Admin-dashboard':
+    case '/Admin-dashboard':
         if(!isset($_SESSION['username'])){
-            header("Location:/BirthDay-CountDown/login");
+            header("Location:/login");
             exit;
         }else{
             $controller=new Birthday_insert_controller();
@@ -38,12 +41,15 @@ switch ($request['path']) {
             break;
         }
 
-    case '/BirthDay-CountDown/Admin-send':
+    case '/Admin-send':
         $controller = new Birthday_get_controller();
-        $controller->sendSMS();
+        $result=$controller->sendSMS();
+        if($result){
+
+        }
         break;
 
-    case '/BirthDay-CountDown/deleteUser':
+    case '/deleteUser':
         $del=new Birthday_get_controller();
         $del->deleteUser();
         break;

@@ -14,6 +14,13 @@ class Birthday_insert_controller{
 //        header("Location:/BirthDay-CountDown/Admin_dashboard");
 
     }
+    public function sms_status(){
+        $set=new Birthday();
+        $set->send_id=$_SESSION['send_id'];
+        $set->check_send();
+        exit();
+
+    }
     public function set_result()
     {
 //        $captcha = $_POST['captcha_input'] ?? '';

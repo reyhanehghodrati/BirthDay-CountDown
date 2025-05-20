@@ -1,8 +1,8 @@
 <?php
-require_once 'model/Birthday.php';
-require 'vendor/autoload.php';
-require_once 'model/SendSms.php';
-require_once 'config/database.php';
+require_once ROOT.'model/Birthday.php';
+require ROOT.'vendor/autoload.php';
+require_once ROOT.'model/SendSms.php';
+require_once ROOT.'config/database.php';
 
 class Birthday_get_controller{
     public function show_result() {
@@ -24,12 +24,19 @@ class Birthday_get_controller{
         $show = new Birthday();
 
         $birthday_list=$show->get_closeset_birthday_toSend();
-        if (!empty($birthday_list) && $birthday_list->num_rows>0):{
+        if (!empty($birthday_list) && $birthday_list->num_rows>0 ):{
             foreach ($birthday_list as $item):{
                 $name = str_replace(' ', '',$item['name']);
-                $send->sendMsgToUser($name,$apikey,$phone);
+                $show->send_id=$item['id'];
+                $send_result=$show->check_send();
+                if($send_result->num_rows>0){
+                    $result=$send->sendMsgToUser($name,$apikey,$phone);
+                if($result){
+                    $show->update_status();
+                }}
             }endforeach;}
     endif;
+        return true;
         exit();
     }
     public function deleteUser(){

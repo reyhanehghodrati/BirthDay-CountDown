@@ -32,6 +32,7 @@ include 'php/head.php';
         </div>
     <?php endif; ?>
 </section>
-
+<?php
+var_dump($_SESSION['username']);?>
 </body>
 </html>
