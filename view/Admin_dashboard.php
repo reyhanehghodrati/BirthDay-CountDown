@@ -17,7 +17,7 @@ $title="داشبورد ادمین";
 $css="css/Admin_dashboard.css";
 
 include 'php/head.php';
-//include 'php/datapicker.php';
+include 'php/datapicker.php';
 ?>
 <body dir="rtl">
 

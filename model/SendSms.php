@@ -15,7 +15,6 @@ class SendSms
         ));
         $response = curl_exec($curl);
         curl_close($curl);
-        // اختیاری: بررسی پاسخ Kavenegar
         return true;
     }
 }

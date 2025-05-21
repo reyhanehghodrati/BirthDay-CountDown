@@ -100,10 +100,10 @@ class Birthday
     public function check_send(){
         $conn = database::connect();
 
-    $query = "SELECT * 
+        $query = "SELECT * 
           FROM birthdays 
           WHERE (sms_status = 0 AND id = '$this->send_id') 
-          OR (id = '$this->send_id' AND  sms_status = 1 AND sms_send_at <= DATE_SUB(NOW(), INTERVAL 1 YEAR))";
+          OR (id = '$this->send_id' AND sms_send_at <= DATE_SUB(NOW(), INTERVAL 1 YEAR))";
 
 
 
@@ -113,7 +113,7 @@ class Birthday
         $conn = database::connect();
 
         $query = "UPDATE birthdays
-                SET sms_status = 1
+                SET sms_status = sms_status+1
                 WHERE id = '$this->send_id'";
 
         return $conn->query($query);

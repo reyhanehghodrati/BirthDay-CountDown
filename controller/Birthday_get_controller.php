@@ -32,13 +32,12 @@ class Birthday_get_controller
         $birthdays = $birthdayModel->get_closeset_birthday_toSend();
 
         if ($birthdays && $birthdays->num_rows > 0) {
-
             while ($row = $birthdays->fetch_assoc()) {
                 $name = str_replace(' ', '', $row['name']);
                 $birthdayModel->send_id=$row['id'];
                 $alreadySent = $birthdayModel->check_send();
-                if ($alreadySent->num_rows === 0) {
 
+                if ($alreadySent->num_rows > 0) {
                     $sent = $sms->sendMsgToUser($name, $adminPhone, $apikey);
                     if ($sent) {
                         $birthdayModel->update_status();
